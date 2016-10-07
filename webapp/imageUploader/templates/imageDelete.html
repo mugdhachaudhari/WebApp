@@ -1,0 +1,20 @@
+ <style>
+body {
+   font-family: Calibri, sans-serif; 
+   font-weight: 200;
+}
+ </style>
+ <body>
+{% if request.user.username %}
+<p align="right">Hello {{request.user.username}} <a href="/logout">Logout</a></p>
+{% else %}
+<p align="right">Hello Guest   <a href="/login">Login</a> </p>
+{% endif %}
+
+<a href="../uploadImage">Back to main page</a>
+{% if message %}
+	<p>
+		{{ message }}
+	</p>
+{% endif %}
+</body>

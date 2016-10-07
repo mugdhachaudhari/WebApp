@@ -1,0 +1,17 @@
+{% block title %}User Registration{% endblock %}
+{% block content %}
+	<html>
+		<div id="header">
+			<h1>Registration form</h1>
+		</div>
+		<div id="table">
+			<form method="post" action=".">{% csrf_token %}
+				<table border="0" align="center">
+					{{ form.as_table }}
+				</table>
+				<input  type="submit" value="Register"/>
+			</form>
+			<a href="/login">Login</a>  Or  <a href="/imageUploader/uploadImage/">Access application as Guest User</a> 
+		</div>
+    
+{% endblock %}

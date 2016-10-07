@@ -1,0 +1,15 @@
+1. Python 3.4.0 
+Download pip
+2. In command prompt Go to webapp folder, It should have manage.py file.
+	Run command pip install -r requirements.txt
+3. Start server
+	python manage.py runserver
+4. Go to local server
+	127.0.0.1:8000   --> Link will take you to the login page. You can choose either to login or go to image uploader page as a guest. 
+
+	On image uploader page you can view images uploaded by guest user and all other users. You can upload image as a guest and provide caption for the image.
+
+	If you choose to login, you can view only images uploaded by you. You can upload image, edit caption for the image or delete image there.
+	User can not view images uploaded by guest user or other user here.
+
+	If you chose to sign up, you need to provide first name, last name, username, password and email.

@@ -1,0 +1,64 @@
+ <style>
+body {
+   font-family: Calibri, sans-serif; 
+   font-weight: 200;
+}
+ </style>
+ <body>
+{% if request.user.username %}
+<p align="right">Hello {{request.user.username}} <a href="/logout">Logout</a></p>
+{% else %}
+<p align="right">Hello Guest   <a href="/login">Login</a> </p>
+{% endif %}
+	<table>
+	{% for image in imagePage %}
+		{% if forloop.counter|add:4|divisibleby:5 %}
+		<tr>
+		{% endif %}
+			<td>
+				<!--a href="{{ image.modelPic.url }}">{{ image.modelPic.name }}
+				</a-->
+				<img src="{{ image.modelPic.url }}" alt="{{ image.modelPic.name }}" height="200" width="200">
+				<br/>
+				<CENTER>
+					{{ image.caption }}
+					{% if request.user.username %}
+					<input type="submit" value="Edit" onclick="location.href = '../editImage?id={{ image.id }}';"/>
+					<input type="submit" value="Delete" onclick="location.href = '../deleteImage?id={{ image.id }}';" />
+					{% endif %}
+				</CENTER>
+			</td>
+		{% if forloop.counter|divisibleby:5 %}
+		</tr>
+		{% endif %}
+    {% endfor %}
+    </table>
+
+ <div class="pagination">
+     <span class="step-links">
+        {% if imagePage.has_previous %}
+            <a href="?page={{ imagePage.previous_page_number }}">previous</a>
+        {% endif %}
+        {% if imagePage %}
+        	<span class="current">
+            	Page {{ imagePage.number }} of {{ imagePage.paginator.num_pages }}.
+        	</span>
+        {% endif %}
+        {% if imagePage.has_next %}
+            <a href="?page={{ imagePage.next_page_number }}">next</a>
+        {% endif %}
+    </span>
+</div>
+
+ <form action="/imageUploader/uploadImage/" method="post" enctype="multipart/form-data">{% csrf_token %}
+	<p>
+		{{ form.as_table }}
+	</p>
+	<input type="submit" value="Submit" />
+</form>
+{% if message %}
+	<p>
+		{{ message }}
+	</p>
+{% endif %}
+</body>

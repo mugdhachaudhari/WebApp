@@ -1,0 +1,31 @@
+ <style>
+body {
+   font-family: Calibri, sans-serif; 
+   font-weight: 200;
+}
+ </style>
+ <body>
+{% if request.user.username %}
+<p align="right">Hello {{request.user.username}} <a href="/logout">Logout</a></p>
+{% else %}
+<p align="right">Hello Guest   <a href="/login">Login</a> </p>
+{% endif %}
+	
+<img src="{{ image.modelPic.url }}" alt="{{ image.modelPic.name }}" height="200" width="200">
+ <form action="/imageUploader/editImage/" method="post" enctype="multipart/form-data">{% csrf_token %}
+	<p>
+		{{ form.as_table }}
+		{% for hidden in form.hidden_fields %}
+    		{{ hidden }}
+		{% endfor %}
+	</p>
+	<input id="imageId" name="imageId" type="hidden" value="{{ image.id }}" />
+	<input type="submit" value="Edit Caption" />
+</form>
+{% if message %}
+	<p>
+		{{ message }}
+	</p>
+{% endif %}
+<a href="../uploadImage">Back to main page</a>
+</body>
